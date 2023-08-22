@@ -1,0 +1,56 @@
+<mvc:View controllerName="project1.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:tnt="sap.tnt"
+    xmlns:u="sap.ui.unified"
+    xmlns:core="sap.ui.core">
+    <Page id="page" title="{i18n>title}">
+        	<tnt:ToolHeader id="_IDGenToolHeader1">
+            <Select id="SelectData">
+					<items>
+						<core:Item id="_IDGenIftem1" text="Select" /> 
+						<core:Item id="_IDGenItem1" text="Position Data" key="Position"/>
+						<core:Item id="_IDGenItem2" text="Personal Information" key="Personal"/>
+					</items>
+				</Select>               
+			<ToolbarSpacer id="_IDGenToolbarSpacer2"/>
+			<ToolbarSpacer id="_IDGenToolbarSpacer3"/>
+			<ToolbarSpacer id="_IDGenToolbarSpacer5"/>
+			<ToolbarSpacer id="_IDGenToolbarSpacer7"/>
+			<ToolbarSpacer id="_IDGenToolbarSpacer"/>
+			<ToolbarSpacer id="_IDGenToolbarSpace5r"/>
+			<ToolbarSpacer id="_IDGenToolbarSpacer55"/>
+			<ToolbarSpacer id="_IDGenToolbarSpacer78"/>
+			<ToolbarSpacer id="_IDGenToolbarSpa5cer78"/>
+			<ToolbarSpacer id="_IDGenToolbarSpac5er78"/>
+			<ToolbarSpacer id="_IDGenToolbarSpace5r78"/>
+			<ToolbarSpacer id="_IDGenToolbarSpacer578"/>
+			<ToolbarSpacer id="_IDGenToolbarSpa5cer578"/>
+			<ToolbarSpacer id="_IDGenToolbarSpac5er578"/>
+			<ToolbarSpacer id="_IDGenToolbarSpace5r578"/>
+			<ToolbarSpacer id="_IDGenToolbarSpacer4578"/>
+			<ToolbarSpacer id="_IDGenToolbarSpacer5878"/>
+			<ToolbarSpacer id="_IDGenToolbarSpacer5768"/>
+			<ToolbarSpacer id="_IDGenToolbarSpacer5784"/>
+					<Button id="downloadButton" text="Download Template" press="onDownloadItem" class="buttondownloade" type="Emphasized" icon="sap-icon://download">
+				</Button>
+				<ToolbarSpacer id="_IDGenToolbarSpacer1"/>
+					
+			</tnt:ToolHeader>
+            <Panel id="_IDGenPanel1" class="panel" headerText="Upload Excel File"  >
+    <VBox id="_IDGenVBox2" class="box" >
+      <u:FileUploader id="fileUploader"
+                    uploadUrl="UploadExcelFile" 
+                    buttonText="Browse"
+					fileType="xlsx"
+                    change="onFileUpload" />
+
+                <HBox id="_IDGenHBox1" >    <Button id="_IDGenButton1" type="Default" text="Validate"></Button>
+                    <Button id="_IDGenButton2" type="Default" text="Submit"></Button></HBox>
+     
+    </VBox>
+  </Panel>
+
+
+    </Page>
+</mvc:View>
