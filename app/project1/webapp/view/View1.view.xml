@@ -37,19 +37,52 @@
 				<ToolbarSpacer id="_IDGenToolbarSpacer1"/>
 					
 			</tnt:ToolHeader>
-            <Panel id="_IDGenPanel1" class="panel" headerText="Upload Excel File"  >
-    <VBox id="_IDGenVBox2" class="box" >
+           <Panel id="_IDGenPanel1" class="panel" headerText="File Upload"  >
+    <VBox id="_IDGenVBox2" class="box" alignItems="Center">
       <u:FileUploader id="fileUploader"
                     uploadUrl="UploadExcelFile" 
                     buttonText="Browse"
-					fileType="xlsx"
-                    change="onFileUpload" />
+                    fileType="xlsx"
+                    change="onFileUpload" 
+                    class="customMarginBottom"
+                    placeholder="Upload Excel Template"/>
 
-                <HBox id="_IDGenHBox1" >    <Button id="_IDGenButton1" type="Default" text="Validate"></Button>
-                    <Button id="_IDGenButton2" type="Default" text="Submit"></Button></HBox>
+                <HBox id="_IDGenHBox1" >  
+                  <Button id="_IDGenButton1" type="Default" press="handleValidatePress" text="Validate" class="customMarginRight"></Button>
+                
+                    <Button id="_IDGenButton2" type="Default" text="Submit" press="validate_Error" ></Button></HBox>
+                    <Button id="_IDGenButton3" type="Default" text="navigate" press="navToPerPersonal_Screen2"></Button>
+                    
+
+                    
      
     </VBox>
   </Panel>
+
+				<Panel id="_IDGenPanel2" >
+        	<Table id="dataTable"
+             items="{/dataSet}" growing="true" growingThreshold="20" inset="false" >
+        <columns>
+          <Column id="_IDGenColumn1">
+            <Text id="_IDGenText1" text="{}" />
+          </Column>
+          
+          <!-- Add more columns if needed -->
+        </columns>
+        <items>
+          <ColumnListItem id="_IDGenColumnListItem1">
+            <cells>
+              <Text id="_IDGenText3" text="{}" />
+              
+              <!-- Add more cells based on the column count -->
+            </cells>
+          </ColumnListItem>
+        </items>
+      </Table></Panel>
+   
+     
+    
+  
 
 
     </Page>

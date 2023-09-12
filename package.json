@@ -7,7 +7,10 @@
     "private": true,
     "dependencies": {
         "@sap/cds": "^7",
-        "express": "^4"
+        "@sap/cds-odata-v2-adapter-proxy": "^1.9.21",
+        "express": "^4",
+        "mongodb": "^2.2.19",
+        "node.js": "^0.0.1-security"
     },
     "devDependencies": {
         "@cap-js/sqlite": "^1",
