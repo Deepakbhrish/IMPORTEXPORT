@@ -47,6 +47,7 @@
                     class="customMarginBottom"
                     placeholder="Upload Excel Template"/>
 
+<<<<<<< HEAD
                 <HBox id="_IDGenHBox1" >  
                   <Button id="_IDGenButton1" type="Default" press="handleValidatePress" text="Validate" class="customMarginRight"></Button>
                 
@@ -55,6 +56,42 @@
                     
 
                     
+=======
+                <HBox id="_IDGenHBox1" >    <Button id="_IDGenButton1" type="Default" text="Validate"></Button>
+                    <Button id="_IDGenButton2" type="Default" text="Submit"></Button></HBox>
+
+
+	    					<Table id="dataTable"
+             items="{/dataSet}">
+        <columns>
+          <Column id="_IDGenColumn1">
+            <Text id="_IDGenText1" text="{0}" />
+          </Column>
+          <Column id="_IDGenColumn2">
+            <Text id="_IDGenText2" text="{1}" />
+          </Column>
+		  <Column id="_IDGenColuxxmn2">
+            <Text id="_IDGenTedxt2" text="{2}" />
+          </Column>
+		  <Column id="_IDGenColuxxcmn2">
+            <Text id="_IDGenTecdxt2" text="{3}" />
+          </Column>
+          <!-- Add more columns if needed -->
+        </columns>
+        <items>
+          <ColumnListItem id="_IDGenColumnListItem1">
+            <cells>
+              <Text id="_IDGenText3" text="{0}" />
+              <Text id="_IDGenText4" text="{1}" />
+              <Text id="_IDGenTextd4" text="{2}" />
+              <Text id="_IDGenTextdc4" text="{3}" />
+              <!-- Add more cells based on the column count -->
+            </cells>
+          </ColumnListItem>
+        </items>
+      </Table>
+   
+>>>>>>> 6a7635791af82da05053011f6c278350787a9cbd
      
     </VBox>
   </Panel>
