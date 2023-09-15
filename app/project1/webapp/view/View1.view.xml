@@ -47,7 +47,6 @@
                     class="customMarginBottom"
                     placeholder="Upload Excel Template"/>
 
-<<<<<<< HEAD
                 <HBox id="_IDGenHBox1" >  
                   <Button id="_IDGenButton1" type="Default" press="handleValidatePress" text="Validate" class="customMarginRight"></Button>
                 
@@ -56,66 +55,39 @@
                     
 
                     
-=======
-                <HBox id="_IDGenHBox1" >    <Button id="_IDGenButton1" type="Default" text="Validate"></Button>
-                    <Button id="_IDGenButton2" type="Default" text="Submit"></Button></HBox>
-
-
-	    					<Table id="dataTable"
-             items="{/dataSet}">
-        <columns>
-          <Column id="_IDGenColumn1">
-            <Text id="_IDGenText1" text="{0}" />
-          </Column>
-          <Column id="_IDGenColumn2">
-            <Text id="_IDGenText2" text="{1}" />
-          </Column>
-		  <Column id="_IDGenColuxxmn2">
-            <Text id="_IDGenTedxt2" text="{2}" />
-          </Column>
-		  <Column id="_IDGenColuxxcmn2">
-            <Text id="_IDGenTecdxt2" text="{3}" />
-          </Column>
-          <!-- Add more columns if needed -->
-        </columns>
-        <items>
-          <ColumnListItem id="_IDGenColumnListItem1">
-            <cells>
-              <Text id="_IDGenText3" text="{0}" />
-              <Text id="_IDGenText4" text="{1}" />
-              <Text id="_IDGenTextd4" text="{2}" />
-              <Text id="_IDGenTextdc4" text="{3}" />
-              <!-- Add more cells based on the column count -->
-            </cells>
-          </ColumnListItem>
-        </items>
-      </Table>
-   
->>>>>>> 6a7635791af82da05053011f6c278350787a9cbd
      
     </VBox>
   </Panel>
 
-				<Panel id="_IDGenPanel2" >
-        	<Table id="dataTable"
-             items="{/dataSet}" growing="true" growingThreshold="20" inset="false" >
-        <columns>
-          <Column id="_IDGenColumn1">
-            <Text id="_IDGenText1" text="{}" />
-          </Column>
-          
-          <!-- Add more columns if needed -->
-        </columns>
-        <items>
-          <ColumnListItem id="_IDGenColumnListItem1">
-            <cells>
-              <Text id="_IDGenText3" text="{}" />
-              
-              <!-- Add more cells based on the column count -->
-            </cells>
-          </ColumnListItem>
-        </items>
-      </Table></Panel>
+      <Panel id="_IDGenPanel3"><Table id="dataTable" growing="true" items="{}" growingThreshold="10" paste="onPaste">
+				<headerToolbar>
+					<OverflowToolbar id="otbSubheader">
+						<Title id="_IDGenTitle1" text="Table" level="H2" />
+						<ToolbarSpacer id="_IDGenToolbarSpacer8" />
+						<Button id="editButton" text="Edit" type="Transparent"
+							press="onEdit" />
+						<Button id="saveButton" text="Save" type="Transparent"
+							press="onSave" visible="false" />
+						<Button id="cancelButton" text="Cancel" type="Transparent"
+							press="onCancel" visible="false" />
+					</OverflowToolbar>
+				</headerToolbar>
+				<columns>
+					<Column id="_IDGenColumn2" width="12em">
+						<Text id="_IDGenText4" text="{}" />
+					</Column>
+					
+					
+				</columns>
+				<items>
+					<ColumnListItem id="_IDGenColumnListItem1" vAlign="Middle">
+						<cells>
+                           <Text id="_IDGenText5" text="{}" ></Text>
+							
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table></Panel>
    
      
     

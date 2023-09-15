@@ -2,23 +2,25 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/m/MessageBox",
     "sap/ui/model/json/JSONModel",
+    'sap/m/ColumnListItem',
+    'sap/m/Input',
     "sap/ui/core/util/File",
     "sap/ui/core/Fragment",
+    'sap/m/MessageToast',
+    "sap/m/Text"
 
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller,MessageBox,JSONModel,FileUtil, Fragment) {
+    function (Controller,MessageBox,JSONModel,ColumnListItem, Input,FileUtil, Fragment,MessageToast,Text) {
         "use strict";
 
         return Controller.extend("project1.controller.View1", {
-            onInit: function () {
-                var oData = {
-                    dataSet: []
-                  };
-                  var oModel = new JSONModel(oData);
-                  this.getView().setModel(oModel);
+            onInit: function (evt) {
+                //   this.oModel = new JSONModel(this.oData);
+                //   this.getView().setModel(this.oModel);
+                  
           
                   var script = document.createElement('script');
                           script.onload = function () {
@@ -27,38 +29,45 @@ sap.ui.define([
                           };
                           script.src = '//unpkg.com/xlsx/dist/xlsx.full.min.js';
                           document.head.appendChild(script);
+                this.tTable = this.getView().byId("dataTable");
+                // this.oReadOnlyTemplate = this.byId("dataTable").removeItem(0);
+                // rebindTable(this.oReadOnlyTemplate, "Navigation");
+                this.oEditableTemplate = new ColumnListItem({
+                    cells: [
+                        new Input({
+                            value: "{code}"
+                        }), new Input({
+                            value: "{FirstName}",
+                        }), new Input({
+                            value: "{LastName}",
+                        }), new Input({
+                            value: "{Email}",
+                        })
+                    ]
+                });
+                this.oReadOnlyTemplate = new ColumnListItem({
+                    cells: [
+                        new Text({
+                            text:"{code}"
+                        }), new Text({
+                            text: "{FirstName}",
+                        }), new Text({
+                            text: "{LastName}",
+                        }), new Text({
+                            text: "{Email}",
+                        })
+                    ]
+                });
+
 
             },
-<<<<<<< HEAD
-            // onFileUpload: function(oEvent) {
-            //     debugger;
-    
-            //     var oFileUploader = oEvent.getSource();
-            //     var oFile = oFileUploader.oFileUpload.files[0];
-                
-            //     // var sFileName = oFile.name;
-            //     // var sFileExtension = sFileName.split(".").pop();
-                
-            //     // if (sFileExtension.toLowerCase() !== "xlsx") {
-            //     //   MessageToast.show("Please upload an Excel file (XLSX).");
-            //     //   return;
-            //     // }
-                
-            //     var oReader = new FileReader();
-            //     oReader.onload = function(e) {
-            //       var data = new Uint8Array(e.target.result);
-            //       var workbook = XLSX.read(data, {type: 'array'});
-            //       var sheetName = workbook.SheetNames[0];
-            //       var worksheet = workbook.Sheets[sheetName];
-            //       var jsonData = XLSX.utils.sheet_to_json(worksheet, {header: 1});
-            //       var oModel = this.getView().getModel();
-                  
-            //       oModel.setProperty("/dataSet", jsonData.slice(0)); // Skip the header row
-            //       oModel.refresh(true);
-            //     }.bind(this);
-                
-            //     oReader.readAsArrayBuffer(oFile);
-            //   },
+            
+            
+           
+            
+            
+
+           
             onFileUpload:function(oEvent){
                 debugger;
                 var vFileUploader = this.getView().byId("fileUploader");
@@ -73,11 +82,11 @@ sap.ui.define([
                         var firstSheetName = workbook.SheetNames[0];
                         var worksheet = workbook.Sheets[firstSheetName];
            
-                        var sheetData = XLSX.utils.sheet_to_json(worksheet, {header: 1});
+                        this.sheetData = XLSX.utils.sheet_to_json(worksheet, {header: 1});
                           // Extract headers (first row)
-                          var headers = sheetData.shift();
+                          var headers = this.sheetData.shift();
                                               // Convert the remaining rows to objects using headers
-                                              var jsonData = sheetData.map(function(row) {
+                                                var jsonData = this.sheetData.map(function(row) {
                                                 var obj = {};
                                                 headers.forEach(function(header, index) {
                                                     obj[header] = row[index];
@@ -97,10 +106,6 @@ sap.ui.define([
                             }
                         }
                     // });
-                        
-                    
-        
-                                            
                                // If all rows passed the validation, set the model
                                var oModel = new JSONModel(jsonData);
                                this.getView().setModel(oModel);
@@ -122,7 +127,7 @@ sap.ui.define([
                                });
                   
                                // Create new items using the keys
-                               jsonData.forEach(function(obj) {
+                                jsonData.forEach(function(obj) {
                                    var cells = headers.map(function(header) {
                                        return new sap.m.Text({text: obj[header]});
                                    });
@@ -130,30 +135,49 @@ sap.ui.define([
                                        cells: cells
                                    });
                                    oTable.addItem(columnListItem);
-        
-                                  
-                                   
                                });
                            }.bind(this);
                            reader.readAsArrayBuffer(vFile);
-                           
-        
-                          
-        
-                           
-                           
-                           
-                           
-        
                            MessageToast.show(`File uploaded successfully by the name: ${sFileName}` );
-        
-        
-               
-        
-                        
                        }
                 
                 },
+                rebindTable: function(oTemplate, sKeyboardMode) {
+                    // var oTable = this.getView().byId("dataTable");
+                    this.tTable.bindItems({
+                        path:"/",
+                        template: oTemplate,
+                        templateShareable: true,
+                        
+    
+                        
+                    }).setKeyboardMode(sKeyboardMode);
+                },
+                onEdit: function() {
+                    // this.aProductCollection = deepExtend([], this.oModel.getProperty("/"));
+                    this.byId("editButton").setVisible(false);
+                    this.byId("saveButton").setVisible(true);
+                    this.byId("cancelButton").setVisible(true);
+                    this.rebindTable(this.oEditableTemplate, "Edit");
+                    // this.rebindTable(this.oReadOnlyTemplate, "Navigation");
+    
+                },
+                onCancel: function() {
+                    // var oReadOnlyTemplate = this.getView().byId("dataTable").removeItem(0);
+                    this.byId("cancelButton").setVisible(false);
+                    this.byId("saveButton").setVisible(false);
+                    this.byId("editButton").setVisible(true);
+                    // this.oModel.setProperty("/", this.aProductCollection);
+                    this.rebindTable(this.oReadOnlyTemplate, "Navigation");
+                },
+                onSave: function() {
+                    // var oReadOnlyTemplate = this.getView().byId("dataTable").removeItem(0);
+                    this.byId("saveButton").setVisible(false);
+                    this.byId("cancelButton").setVisible(false);
+                    this.byId("editButton").setVisible(true);
+                    this.rebindTable(this.oReadOnlyTemplate, "Navigation");
+                },
+                
 
                 handleValidatePress:function(oEvent){
 
@@ -191,38 +215,8 @@ sap.ui.define([
         
         
             },    
-                   
-=======
-            onFileUpload: function(oEvent) {
-                debugger;
-    
-                var oFileUploader = oEvent.getSource();
-                var oFile = oFileUploader.oFileUpload.files[0];
-                
-                // var sFileName = oFile.name;
-                // var sFileExtension = sFileName.split(".").pop();
-                
-                // if (sFileExtension.toLowerCase() !== "xlsx") {
-                //   MessageToast.show("Please upload an Excel file (XLSX).");
-                //   return;
-                // }
-                
-                var oReader = new FileReader();
-                oReader.onload = function(e) {
-                  var data = new Uint8Array(e.target.result);
-                  var workbook = XLSX.read(data, {type: 'array'});
-                  var sheetName = workbook.SheetNames[0];
-                  var worksheet = workbook.Sheets[sheetName];
-                  var jsonData = XLSX.utils.sheet_to_json(worksheet, {header: 1});
-                  var oModel = this.getView().getModel();
-                  
-                  oModel.setProperty("/dataSet", jsonData.slice(0)); // Skip the header row
-                  oModel.refresh(true);
-                }.bind(this);
-                
-                oReader.readAsArrayBuffer(oFile);
-              },
->>>>>>> 6a7635791af82da05053011f6c278350787a9cbd
+            
+            
             onDownloadItem: function(oEvent) {
                 var SelectValue = this.getView().byId("SelectData").getSelectedKey();
                 
